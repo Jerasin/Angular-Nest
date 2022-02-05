@@ -9,5 +9,6 @@ import { Message } from '@web/api-interfaces';
 })
 export class AppComponent {
   hello$ = this.http.get<Message>('/api/hello');
+  users$ = this.http.get<Message>('/api/users/hello');
   constructor(private http: HttpClient) {}
 }
