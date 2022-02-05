@@ -1,0 +1,47 @@
+version: '3'
+services:
+  base:
+    image: jerasin/base-angular-nest:1.0
+    build: 
+      context: .
+      dockerfile: docker/base.Dockerfile
+      target: base-stage
+    command: /bin/true
+  api:
+    build:
+      context: .
+      dockerfile: docker/api.dev.Dockerfile
+      target: runtime-stage
+    container_name: api 
+    env_file:
+    - .env
+    depends_on:
+      - base
+    ports:
+      - 3333:3333
+    volumes:
+      - ./apps/api/src:/app/apps/api/src
+      - ./libs:/app/libs
+      - ./logs:/app/logs
+  web:
+    build:
+      context: .
+      dockerfile: docker/web.dev.Dockerfile
+      target: runtime-stage
+    container_name: web
+    restart: on-failure
+    depends_on:
+      - base
+    ports:
+      - 4200:4200
+    volumes:
+      - ./apps/bookstore/src:/app/apps/bookstore/src
+  # nginx:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/nginx.Dockerfile
+  #   container_name: nginx
+  #   restart: always
+  #   ports:
+  #     - 80:80
+  #     - 3333:3333
