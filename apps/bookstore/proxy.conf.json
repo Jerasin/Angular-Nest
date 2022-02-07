@@ -1,6 +1,11 @@
 {
+  "_comment": "https://stackoverflow.com/questions/59452725/angular-cli-proxy-wont-connect-through-docker-econnrefused",
   "/api": {
-    "target": "http://172.23.67.16:3333",
+    "target": {
+      "host": "api",
+      "port": 30080,
+      "protocol": "http:"
+    },
     "secure": false
   }
 }

@@ -17,8 +17,8 @@ services:
     - .env
     depends_on:
       - base
-    ports:
-      - 3333:3333
+    # ports:
+    #   - 3333:3333
     volumes:
       - ./apps/api/src:/app/apps/api/src
       - ./libs:/app/libs
@@ -30,18 +30,22 @@ services:
       target: runtime-stage
     container_name: web
     restart: on-failure
-    depends_on:
-      - base
-    ports:
-      - 4200:4200
+    # ports:
+    #   - 4200:4200
     volumes:
       - ./apps/bookstore/src:/app/apps/bookstore/src
-  # nginx:
-  #   build:
-  #     context: .
-  #     dockerfile: docker/nginx.Dockerfile
-  #   container_name: nginx
-  #   restart: always
-  #   ports:
-  #     - 80:80
-  #     - 3333:3333
+    depends_on:
+      - base
+      - api
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx.dev.Dockerfile
+    container_name: nginx
+    restart: always
+    ports:
+      - 4200:4200
+      - 3333:3333
+      - 8090:8080
+    depends_on:
+      - api
