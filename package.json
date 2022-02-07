@@ -7,7 +7,9 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "start:api": "nx serve api",
+    "start:web": "nx serve bookstore"
   },
   "private": true,
   "dependencies": {
@@ -33,7 +35,7 @@
     "@angular-eslint/eslint-plugin": "~13.0.1",
     "@angular-eslint/eslint-plugin-template": "~13.0.1",
     "@angular-eslint/template-parser": "~13.0.1",
-    "@angular/cli": "~13.0.0",
+    "@angular/cli": "^13.2.0",
     "@angular/compiler-cli": "^13.0.0",
     "@angular/language-service": "^13.0.0",
     "@nestjs/schematics": "^8.0.0",
@@ -43,7 +45,7 @@
     "@nrwl/eslint-plugin-nx": "13.3.1",
     "@nrwl/jest": "13.3.1",
     "@nrwl/linter": "13.3.1",
-    "@nrwl/nest": "13.3.1",
+    "@nrwl/nest": "^13.3.1",
     "@nrwl/node": "13.3.1",
     "@nrwl/tao": "13.3.1",
     "@nrwl/workspace": "13.3.1",

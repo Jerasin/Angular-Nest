@@ -135,6 +135,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
+            "port": 32080,
             "proxyConfig": "apps/bookstore/proxy.conf.json"
           }
         },
@@ -191,6 +192,52 @@
       },
       "tags": [],
       "implicitDependencies": ["bookstore"]
+    },
+    "myapp": {
+      "root": "libs/myapp",
+      "sourceRoot": "libs/myapp/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/myapp/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/myapp"],
+          "options": {
+            "jestConfig": "libs/myapp/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "users": {
+      "root": "libs/users",
+      "sourceRoot": "libs/users/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/users/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/users"],
+          "options": {
+            "jestConfig": "libs/users/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     }
   }
 }
