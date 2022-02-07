@@ -135,6 +135,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
+            "port": 32080,
             "proxyConfig": "apps/bookstore/proxy.conf.json"
           }
         },
