@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install packages
-        run: yarn --prefer-offline
+        run: yarn install
       - name: Run tests
         run: yarn  nx run-many --target=test --all
 
