@@ -1,0 +1,14 @@
+name: Test CI
+on:
+   push:
+    branches: 
+      - master
+jobs:
+  test: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install packages
+        run: yarn --prefer-offline
+      - name: Run tests
+        run: yarn  nx run-many --target=test --all
+
