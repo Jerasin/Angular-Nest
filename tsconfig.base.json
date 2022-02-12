@@ -16,7 +16,6 @@
     "baseUrl": ".",
     "paths": {
       "@web/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@web/myapp": ["libs/myapp/src/index.ts"],
       "@web/users": ["libs/users/src/index.ts"]
     }
   },
