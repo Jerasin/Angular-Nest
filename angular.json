@@ -87,7 +87,10 @@
               "apps/bookstore/src/favicon.ico",
               "apps/bookstore/src/assets"
             ],
-            "styles": ["apps/bookstore/src/styles.css"],
+            "styles": [
+              "apps/bookstore/src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
             "scripts": []
           },
           "configurations": {
