@@ -1,23 +1,13 @@
 name: Test CI
 on:
-  check_run:
-    types: [rerequested, completed]
-jobs:
-  test: 
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - name: Install packages
-        run: yarn install
-      - name: Run tests
-        run: yarn  nx run-many --target=test --all
-   push:
+  push:
     branches: 
       - master
       - develop
+  pull_request:
+    types: [opened, edited,closed,reopened,synchronize]
+  workflow_dispatch:
+   
 jobs:
   test: 
     runs-on: ubuntu-latest
