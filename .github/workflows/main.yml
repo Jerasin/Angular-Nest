@@ -1,9 +1,13 @@
 name: Test CI
 on:
-   push:
+  push:
     branches: 
       - master
       - develop
+  pull_request:
+    types: [opened, edited,closed,reopened,synchronize]
+  workflow_dispatch:
+   
 jobs:
   test: 
     runs-on: ubuntu-latest
