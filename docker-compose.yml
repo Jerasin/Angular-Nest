@@ -13,12 +13,19 @@ services:
       dockerfile: docker/api.dev.Dockerfile
       target: runtime-stage
     container_name: api 
+    restart: on-failure
+    # command: sh -c './docker/build-scripts/wait-for/wait-for mysql:3306 -- yarn start:api'
     env_file:
     - .env
     depends_on:
       - base
+      - mysql
     # ports:
     #   - 3333:3333
+    logging:
+      driver: json-file
+      options:
+        max-size: 128m
     volumes:
       - ./apps/api/src:/app/apps/api/src
       - ./libs:/app/libs
@@ -49,3 +56,30 @@ services:
       - 8090:8080
     depends_on:
       - api
+  mysql:
+    image: mysql:8.0
+    container_name: api-database
+    environment:
+      MYSQL_DATABASE: api
+      MYSQL_USER: db
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - 3306:3306
+    logging:
+      driver: json-file
+      options:
+        max-size: 128m
+    volumes:
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+      - ./my-db:/var/lib/mysql:z
+  adminer:
+    image: adminer
+    container_name: database-adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  my-db:
+    driver: local
