@@ -1,0 +1,4 @@
+[mysqld]
+transaction-isolation=READ-COMMITTED
+innodb-lock-wait-timeout=30
+
