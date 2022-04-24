@@ -57,22 +57,29 @@ services:
     depends_on:
       - api
   mysql:
-    image: mysql:8.0
+    # image: mysql:8.0
+    build:
+      context: .
+      dockerfile: docker/db.Dockerfile
     container_name: api-database
     environment:
       MYSQL_DATABASE: api
       MYSQL_USER: db
       MYSQL_PASSWORD: 123456
-      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: root
     ports:
-      - 3306:3306
+      - 3307:3306
     logging:
       driver: json-file
       options:
         max-size: 128m
     volumes:
-      - ./docker/mysql/conf.d:/etc/mysql/conf.d
-      - ./my-db:/var/lib/mysql:z
+      - db-data:/var/lib/mysql:z
+
+      #Ref: https://stackoverflow.com/questions/40221661/docker-compose-cannot-start-mysql-permission-denied-to-tmp
+      # - ./db-data:/var/lib/mysql:z
+      #? move db.Dockerfike
+      # - ./docker/mysql/conf.d:/etc/mysql/conf.d  
   adminer:
     image: adminer
     container_name: database-adminer
@@ -81,5 +88,5 @@ services:
       - 8080:8080
 
 volumes:
-  my-db:
+  db-data:
     driver: local
