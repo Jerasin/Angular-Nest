@@ -10,8 +10,11 @@
 <div>Users1: {{ users$ | async | json }}</div>
 <div>ItemList: {{ itemList$ | async | json }}</div>
 <div class="container bg-secondary">
-  <div *ngFor="let item of items" >
+  <div *ngFor="let item of items">
     <h3>{{ item }}</h3>
   </div>
+  <button type="button" class="btn btn-warning" (click)="signOut()">
+    Logout
+  </button>
 </div>
 <p>users works!</p>

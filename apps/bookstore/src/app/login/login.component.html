@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row container-form">
+    <div class="col-md-6 offset-md-3">
+      <div class="login-form bg-light mt-4 p-4">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label" #email required
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              formControlName="email"
+              required
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="form-label" required
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+            />
+          </div>
+
+          <div class="mt-3">
+            <button type="submit" class="btn btn-primary me-2">Login</button>
+            <button
+              type="button"
+              class="btn btn-warning"
+              (click)="registerPage()"
+            >
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

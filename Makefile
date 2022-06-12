@@ -1,3 +1,4 @@
+# alias m=make
 .DEFAULT_GOAL:= dev
 .PHONY: dev build up start down destroy stop restart logs logs-slim ps
 dev: destroy build up logs
@@ -13,3 +14,7 @@ stop:
 	@docker-compose	stop $(c)
 down:
 	@docker-compose down $(c)
+# migration:
+# 	yarn typeorm migration:create -n $()
+generate:
+	yarn nx generate @nrwl/nest:library $(c) --controller --service 
