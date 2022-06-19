@@ -4,6 +4,14 @@
 
 export const environment = {
   production: false,
+  firebaseConfig: {
+    apiKey: 'AIzaSyDloKb34JK0v4fJIuMl228ivXJX9wuYDUk',
+    authDomain: 'angular-nestjs-c33b2.firebaseapp.com',
+    projectId: 'angular-nestjs-c33b2',
+    storageBucket: 'angular-nestjs-c33b2.appspot.com',
+    messagingSenderId: '448451194177',
+    appId: '1:448451194177:web:448fa8fb63922334eb85c0',
+  },
 };
 
 /*
