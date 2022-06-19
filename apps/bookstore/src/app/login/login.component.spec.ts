@@ -6,17 +6,22 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthService } from '../auth/index';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let angularFirestore: AngularFirestore;
-  let angularFireAuth: AngularFireAuth;
   let authService: AuthService;
   let router: Router;
 
+  const authState = {
+    displayName: null,
+    isAnonymous: true,
+    uid: '17WvU2Vj58SnTz8v7EqyYYb0WRc2',
+  };
+
   const authStub: any = {
-    authState: {},
+    authState: of(authState),
     auth: {
       signInWithEmailAndPassword() {
         return Promise.resolve();
@@ -41,16 +46,17 @@ describe('LoginComponent', () => {
     }).compileComponents();
   });
 
-  beforeEach(inject([FormBuilder], (fb: FormBuilder) => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    component.loginForm = fb.group({ email: [''], password: [''] });
-    angularFirestore = TestBed.inject(AngularFirestore);
-    angularFireAuth = TestBed.inject(AngularFireAuth);
-    fixture.detectChanges();
-    authService = TestBed.inject(AuthService);
-    router = TestBed.inject(Router);
-  }));
+  beforeEach(inject(
+    [FormBuilder, AngularFireAuth],
+    (fb: FormBuilder, afAuth: AngularFireAuth) => {
+      fixture = TestBed.createComponent(LoginComponent);
+      component = fixture.componentInstance;
+      component.loginForm = fb.group({ email: [''], password: [''] });
+      fixture.detectChanges();
+      authService = TestBed.inject(AuthService);
+      router = TestBed.inject(Router);
+    }
+  ));
 
   it('should create', () => {
     expect(component).toBeTruthy();

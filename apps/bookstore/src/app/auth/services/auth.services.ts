@@ -42,9 +42,10 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
+          console.log(result.user);
           this.router.navigate(['users']);
         });
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
       })
       .catch((error) => {
         window.alert(error.message);

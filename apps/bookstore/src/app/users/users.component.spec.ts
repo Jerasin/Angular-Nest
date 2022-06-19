@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersComponent } from './users.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -6,17 +6,22 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '../auth/index';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
-  let angularFirestore: AngularFirestore;
-  let angularFireAuth: AngularFireAuth;
   let authService: AuthService;
   let router: Router;
 
+  const authState = {
+    displayName: null,
+    isAnonymous: true,
+    uid: '17WvU2Vj58SnTz8v7EqyYYb0WRc2',
+  };
+
   const authStub: any = {
-    authState: {},
+    authState: of(authState),
     auth: {
       signInWithEmailAndPassword() {
         return Promise.resolve();
@@ -37,15 +42,13 @@ describe('UsersComponent', () => {
     }).compileComponents();
   });
 
-  beforeEach(() => {
+  beforeEach(inject([AngularFireAuth], (afAuth: AngularFireAuth) => {
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    angularFirestore = TestBed.inject(AngularFirestore);
-    angularFireAuth = TestBed.inject(AngularFireAuth);
     authService = TestBed.inject(AuthService);
     router = TestBed.inject(Router);
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
