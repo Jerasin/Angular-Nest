@@ -21,19 +21,19 @@ export class AuthService {
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
-    this.afAuth.authState.subscribe((user) => {
-      console.log(user);
-      if (user) {
-        this.userData = user;
-        console.log(this.userData?.multiFactor?.user?.accessToken);
-        localStorage.setItem(
-          'user',
-          JSON.stringify(this.userData?.multiFactor?.user?.accessToken)
-        );
-      } else {
-        localStorage.removeItem('user');
-      }
-    });
+    // this.afAuth.authState.subscribe((user) => {
+    //   console.log(user);
+    //   if (user) {
+    //     this.userData = user;
+    //     console.log(this.userData?.multiFactor?.user?.accessToken);
+    //     localStorage.setItem(
+    //       'user',
+    //       JSON.stringify(this.userData?.multiFactor?.user?.accessToken)
+    //     );
+    //   } else {
+    //     localStorage.removeItem('user');
+    //   }
+    // });
   }
 
   // Sign in with email/password

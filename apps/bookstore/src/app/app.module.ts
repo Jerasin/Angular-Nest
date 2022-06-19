@@ -7,10 +7,10 @@ import { UsersComponent } from './users/users.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from '../environments/environment';
 import * as _ from 'lodash';
 import { AuthService } from './auth/index';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { environment } from '../environments/environment';
 const { firebaseConfig } = environment;
 
 @NgModule({
